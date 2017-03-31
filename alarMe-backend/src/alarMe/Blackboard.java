@@ -1,10 +1,9 @@
 package alarMe;
-
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -38,20 +37,22 @@ public class Blackboard extends LoginProcess {
 	
 	
 	public void setAssignmentsB(){
-		
+		//boolean success = true;
 		driver.get("https://ntnu.blackboard.com/webapps/portal/execute/tabs/tabAction?tab_tab_group_id=_70_1");
 	    driver.findElement(By.className("loginPrimary")).click();
 	    try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
-			e.printStackTrace();
+			e.printStackTrace(); 
+			//success = false;
 		}
 
 	    //Choose NTNU as the institution
-	    try {
+	   /* try {
 			chooseNTNU();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
+			//success = false;
 		}
 
 	    //Fill in username and password to log in
@@ -59,14 +60,16 @@ public class Blackboard extends LoginProcess {
 			login();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
-		}
+			//success = false;
+		}*/
 
-	    //klikke inn pï¿½ "varsler"
+	    //klikke inn på "varsler"
 	    driver.findElement(By.linkText("Varsler")).click();
 	    try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
+			//success = false;
 		}
 	    driver.findElement(By.id("headerTextheader::1-dueView::1-dueView_4")).click();
 	    driver.findElement(By.id("headerTextheader::1-dueView::1-dueView_3")).click();
@@ -85,7 +88,7 @@ public class Blackboard extends LoginProcess {
 	    for(String element1 : assignments){
 	    	String assignment = element1.replace("\n", " ");
 			assignment = assignment.replaceAll("[,-]", "");
-			assignment = assignment.replace("(2017 Vï¿½R)", "");
+			assignment = assignment.replace("(2017 VÅR)", "");
 			assignment = assignment.replace("  ", " ");
 			assignment = assignment.replace(" Leveringsfrist", "");
 			String[] items = assignment.split(".17");
@@ -123,15 +126,40 @@ public class Blackboard extends LoginProcess {
 	        
 
 	}
+	//return success;
+	    	
 	        
+	}
+
+	public void checkForEqualAssignments(){
+		ArrayList<String> assignments_one = assignmentsB;
+		ArrayList<String> coursecode_one = coursecodeB;
+		ArrayList<String> dates_one = datesB;
+		for (int i = 1; i < assignments_one.size(); i++) {
+			String a1 = assignments_one.get(i);
+	        String a2 = assignments_one.get(i-1);
+	        String b1 = coursecode_one.get(i);
+	        String b2 = coursecode_one.get(i-1);
+	        String c1 = dates_one.get(i);
+	        String c2 = dates_one.get(i-1);
+	        if (a1.equals(a2) && b1.equals(b2) && c1.equals(c2)) {
+	        	assignments_one.remove(a1);
+	        	coursecode_one.remove(b1);
+	        	dates_one.remove(c1);
+	            }
+	    }
+		this.assignmentsB = assignments_one;
+		this.coursecodeB = coursecode_one;
+		this.datesB = dates_one;
+		
 	}
 	
     //Code to add BlackBoard assignments to Database
-    public void addAssignmentsBToDatabase() throws SQLException {
-    	   
+    public boolean addAssignmentsBToDatabase()  {
+    	boolean success = true;   
     	try{
     		Class.forName("com.mysql.jdbc.Driver");
-     	    setConnection();
+     	   	//setConnection();
      	    for (int i = 0; i < assignmentsB.size(); i++){
      	    	PreparedStatement p = (PreparedStatement) connection.prepareStatement("INSERT INTO Assignment(course_code, assignment_name, assignment_date, student_id) VALUES(?,?,?,?)");
      	    	p.setString(1, coursecodeB.get(i));
@@ -143,11 +171,9 @@ public class Blackboard extends LoginProcess {
      	        
       	    }catch(Exception e){
     			System.out.println( "error:" + e);
-    	       
+    			success = true;    	       
     	   }
+		return success;
     	}
-
-
-
-}
+  }
 	

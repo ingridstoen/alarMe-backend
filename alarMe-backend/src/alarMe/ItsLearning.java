@@ -1,8 +1,8 @@
 package alarMe;
 
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -11,8 +11,8 @@ public class ItsLearning extends LoginProcess{
 	
 	
 	protected ArrayList<String> assignmentsI = new ArrayList<String>();
-	protected ArrayList<String> coursecodeI = new ArrayList<String>();
 	protected ArrayList<String> datesI = new ArrayList<String>();
+	protected ArrayList<String> coursecode = new ArrayList<String>();
 	protected ArrayList<String> dateAndCourse = new ArrayList<String>();
     
     //konstruktor
@@ -25,23 +25,35 @@ public class ItsLearning extends LoginProcess{
         return assignmentsI;
     }
     
-    public ArrayList<String> getCoursecodeI(){
-    	return coursecodeI;
-    }
-    
     public ArrayList<String> getDatesI(){
     	return datesI;
     }
+    
+    public ArrayList<String> getCoursecodeI(){
+    	return coursecode;
+    }
        
         
-    public void setAssignmentsI() throws InterruptedException{
+    public void setAssignmentsI(){
     	
     	driver.get("http://www.ilearn.sexy"); //loads the webpage
-    	Thread.sleep(5000);
+    	try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
     	
-    	//login();
+    	try {
+			login();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
     	
-    	//Thread.sleep(5000);
+    	try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
     	
     	driver.switchTo().frame(driver.findElement(By.name("mainmenu")));
     	//Fetch the assignments and dates from itsLearning
@@ -60,44 +72,67 @@ public class ItsLearning extends LoginProcess{
     		String dateString = date.getText();
     		dateString = dateString.replaceAll(",", "");
     		dateString = dateString.replaceAll("i ", "");
+    		dateString = dateString.replaceAll("  ", " ");
+    		dateString = dateString.replaceAll("VÅR 2017", "");
+    		String [] dateStringNew = dateString.split(" ");
+    		List<String> findCoursecode = Arrays.asList(dateStringNew);
     		dateAndCourse.add(dateString);
+    		
+    		for(String e1 : findCoursecode){
+            	if(e1.length() == 7){
+            		if(e1.matches("^[A-Z]{3}\\d{4}")){
+               			this.coursecode.add(e1);
+            		}
+            	}
+        	}
     
     	}
-    	for (int i = active_assignments.size() + 1; i < dateAndCourse.size(); i++){
+    	for (int i = active_assignments.size(); i < dateAndCourse.size(); i++){
     		if ((i % 2) == 0){
     			String course = dateAndCourse.get(i);
     			String [] course1 = course.split(" ", 2);
     			String courseC = course1 [0];
-    			this.coursecodeI.add(courseC);
+    			this.datesI.add(courseC);
     			
        		}
-    		else{
-    			this.datesI.add(dateAndCourse.get(i));
-    		}
+    	}
+    	
+    		/*else{
+    			this.coursecode.add(dateAndCourse.get(i));
+    			for(String e1 : dateAndCourse){
+	        		if(e1.length() == 7){
+	           			if(e1.matches("^[A-Z]{3}\\d{4}")){
+	           				coursecode.add(e1);
+	           			}
+	           		}
+	        	}
+    		}*/
+    		
 
     	}
     	
-    }
+    
     
     //Code to add Itslearning assignments to Database
-    public void addAssignmentsIToDatabase() throws SQLException {
-        	   
+    public boolean addAssignmentsIToDatabase() {
+        boolean success = true;	   
     	try{
     		Class.forName("com.mysql.jdbc.Driver");
-     	    setConnection();
+     	    //setConnection();
      	    for (int i = 0; i < assignmentsI.size(); i++){
      	    	PreparedStatement p = (PreparedStatement) connection.prepareStatement("INSERT INTO Assignment(course_code, assignment_name, assignment_date, student_id) VALUES(?,?,?,?)");
-     	    	p.setString(1, coursecodeI.get(i));
-     	    	p.setString(2, assignmentsI.get(i));
      	    	p.setString(3, datesI.get(i));
+     	    	p.setString(2, assignmentsI.get(i));
+     	    	p.setString(1, coursecode.get(i));
      	    	p.setInt(4, student_id);
      	    	p.executeUpdate();
      	    }
      	        
       	    }catch(Exception e){
     			System.out.println( "error:" + e);
-    	       
+    			success = false;
     	   }
+		return success;
     	}
     
     

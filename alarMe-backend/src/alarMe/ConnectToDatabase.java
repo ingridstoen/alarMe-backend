@@ -8,20 +8,29 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+
+
 public class ConnectToDatabase {
 		
 	protected Connection connection;
-	private String db = "sql11163131";
+	private String db = "sql11166748";
 	protected static String username;
 	protected static String user_password;
 	protected static int student_id;
 
-	public void setConnection(){
-        try {
+	public void setConnection() throws ClassNotFoundException, SQLException{
+		try {
+        	Class.forName("com.mysql.jdbc.Driver");
         	connection = null;
             String server = "sql11.freemysqlhosting.net";
-            String database_username = "sql11163131";
-            String database_password = "wi4gXfVvT3";
+            String database_username = "sql11166748";
+            String database_password = "fPgJk4eNB2";
             String connectionString = "jdbc:mysql://" + server + "/" + db + "?user=" + database_username + "&password=" + database_password;
             connection = DriverManager.getConnection(connectionString);
             
@@ -31,25 +40,34 @@ public class ConnectToDatabase {
 
 	
 	public boolean checkForNewUser(){
-		setConnection();
+		try {
+			try {
+				setConnection();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} catch (ClassNotFoundException e1) {
+			e1.printStackTrace();
+		}
 		Statement stm = null;
 		try{
-			int rows_database_old = 26;
+			int rows_database_old = 0;
 			stm = connection.createStatement();
-			ResultSet result = stm.executeQuery("select count(*) from Student"); 
+			ResultSet result = stm.executeQuery("select count(student_id) from Student"); 
 	        result.next();
 	        int rows_database = result.getInt(1); 
-			//siden vi tenker at det bare blir lagt til ï¿½n bruker om gangen
+			//siden vi tenker at det bare blir lagt til én bruker om gangen
 			if(rows_database != 0 && rows_database > rows_database_old){
 				return true;
-			}
+			}else{
 			return false;
+			}
 			
 		}catch(Exception e){
 			System.out.println("Her skjedde det noe feil: " + e);
-		
-		}finally {
-	        if (stm != null) { try {
+					
+		/*}finally {
+	        if (stm != null) { try { 
 				stm.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -60,7 +78,7 @@ public class ConnectToDatabase {
 	            } catch (SQLException e) {
 	                e.printStackTrace();
 	            }
-	    }
+	    }*/
 	}
 	return false;
 			
@@ -70,16 +88,24 @@ public class ConnectToDatabase {
 	public ArrayList<String> newUser(){
 		ArrayList<String> user = new ArrayList<String>();
 		if (checkForNewUser() == true){
-			setConnection();
+			/*try {
+				try {
+					setConnection();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			} catch (ClassNotFoundException e1) {
+				e1.printStackTrace();
+			}*/
 			Statement stm = null;
 			try{
-				int student_id = 68;
+				int student_id = 4;
 				stm = connection.createStatement();
 				ResultSet rs = stm.executeQuery("select * from Student");
 				while(rs.next()){
 					student_id += 1;
-					username = rs.getString("username");
-					user_password = rs.getString("user_password");	
+					ConnectToDatabase.username = rs.getString("username");
+					ConnectToDatabase.user_password = rs.getString("user_password");	
 				}
 				user.add(username);
 				user.add(user_password);
