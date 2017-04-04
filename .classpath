@@ -37,5 +37,40 @@
 	<classpathentry kind="lib" path="C:/Users/Heidi/tdt4100-2017-master2/ws/selenium-java-3.0.1/lib/xalan-2.7.2.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Heidi/tdt4100-2017-master2/ws/selenium-java-3.0.1/lib/xercesImpl-2.11.0.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Heidi/tdt4100-2017-master2/ws/selenium-java-3.0.1/lib/xml-apis-1.4.01.jar"/>
+	<classpathentry kind="lib" path="/Users/AmalieHaugAmundsen/Documents/2. klasse/Vår/PU/Programmering/Selenium/selenium-java-3/client-combined-3.0.1-nodeps.jar"/>
+	<classpathentry kind="lib" path="/Users/AmalieHaugAmundsen/Documents/2. klasse/Vår/PU/Programmering/Selenium/selenium-java-3/lib/cglib-nodep-3.2.4.jar"/>
+	<classpathentry kind="lib" path="/Users/AmalieHaugAmundsen/Documents/2. klasse/Vår/PU/Programmering/Selenium/selenium-java-3/lib/commons-codec-1.10.jar"/>
+	<classpathentry kind="lib" path="/Users/AmalieHaugAmundsen/Documents/2. klasse/Vår/PU/Programmering/Selenium/selenium-java-3/lib/commons-exec-1.3.jar"/>
+	<classpathentry kind="lib" path="/Users/AmalieHaugAmundsen/Documents/2. klasse/Vår/PU/Programmering/Selenium/selenium-java-3/lib/commons-io-2.5.jar"/>
+	<classpathentry kind="lib" path="/Users/AmalieHaugAmundsen/Documents/2. klasse/Vår/PU/Programmering/Selenium/selenium-java-3/lib/commons-lang3-3.4.jar"/>
+	<classpathentry kind="lib" path="/Users/AmalieHaugAmundsen/Documents/2. klasse/Vår/PU/Programmering/Selenium/selenium-java-3/lib/commons-logging-1.2.jar"/>
+	<classpathentry kind="lib" path="/Users/AmalieHaugAmundsen/Documents/2. klasse/Vår/PU/Programmering/Selenium/selenium-java-3/lib/cssparser-0.9.20.jar"/>
+	<classpathentry kind="lib" path="/Users/AmalieHaugAmundsen/Documents/2. klasse/Vår/PU/Programmering/Selenium/selenium-java-3/lib/gson-2.3.1.jar"/>
+	<classpathentry kind="lib" path="/Users/AmalieHaugAmundsen/Documents/2. klasse/Vår/PU/Programmering/Selenium/selenium-java-3/lib/guava-19.0.jar"/>
+	<classpathentry kind="lib" path="/Users/AmalieHaugAmundsen/Documents/2. klasse/Vår/PU/Programmering/Selenium/selenium-java-3/lib/hamcrest-core-1.3.jar"/>
+	<classpathentry kind="lib" path="/Users/AmalieHaugAmundsen/Documents/2. klasse/Vår/PU/Programmering/Selenium/selenium-java-3/lib/hamcrest-library-1.3.jar"/>
+	<classpathentry kind="lib" path="/Users/AmalieHaugAmundsen/Documents/2. klasse/Vår/PU/Programmering/Selenium/selenium-java-3/lib/htmlunit-2.23.jar"/>
+	<classpathentry kind="lib" path="/Users/AmalieHaugAmundsen/Documents/2. klasse/Vår/PU/Programmering/Selenium/selenium-java-3/lib/htmlunit-core-js-2.23.jar"/>
+	<classpathentry kind="lib" path="/Users/AmalieHaugAmundsen/Documents/2. klasse/Vår/PU/Programmering/Selenium/selenium-java-3/lib/httpclient-4.5.2.jar"/>
+	<classpathentry kind="lib" path="/Users/AmalieHaugAmundsen/Documents/2. klasse/Vår/PU/Programmering/Selenium/selenium-java-3/lib/httpcore-4.4.4.jar"/>
+	<classpathentry kind="lib" path="/Users/AmalieHaugAmundsen/Documents/2. klasse/Vår/PU/Programmering/Selenium/selenium-java-3/lib/httpmime-4.5.2.jar"/>
+	<classpathentry kind="lib" path="/Users/AmalieHaugAmundsen/Documents/2. klasse/Vår/PU/Programmering/Selenium/selenium-java-3/lib/javax.servlet-api-3.1.0.jar"/>
+	<classpathentry kind="lib" path="/Users/AmalieHaugAmundsen/Documents/2. klasse/Vår/PU/Programmering/Selenium/selenium-java-3/lib/jetty-io-9.2.13.v20150730.jar"/>
+	<classpathentry kind="lib" path="/Users/AmalieHaugAmundsen/Documents/2. klasse/Vår/PU/Programmering/Selenium/selenium-java-3/lib/jetty-util-9.2.13.v20150730.jar"/>
+	<classpathentry kind="lib" path="/Users/AmalieHaugAmundsen/Documents/2. klasse/Vår/PU/Programmering/Selenium/selenium-java-3/lib/jna-4.1.0.jar"/>
+	<classpathentry kind="lib" path="/Users/AmalieHaugAmundsen/Documents/2. klasse/Vår/PU/Programmering/Selenium/selenium-java-3/lib/jna-platform-4.1.0.jar"/>
+	<classpathentry kind="lib" path="/Users/AmalieHaugAmundsen/Documents/2. klasse/Vår/PU/Programmering/Selenium/selenium-java-3/lib/junit-4.12.jar"/>
+	<classpathentry kind="lib" path="/Users/AmalieHaugAmundsen/Documents/2. klasse/Vår/PU/Programmering/Selenium/selenium-java-3/lib/neko-htmlunit-2.23.jar"/>
+	<classpathentry kind="lib" path="/Users/AmalieHaugAmundsen/Documents/2. klasse/Vår/PU/Programmering/Selenium/selenium-java-3/lib/netty-3.5.7.Final.jar"/>
+	<classpathentry kind="lib" path="/Users/AmalieHaugAmundsen/Documents/2. klasse/Vår/PU/Programmering/Selenium/selenium-java-3/lib/phantomjsdriver-1.3.0.jar"/>
+	<classpathentry kind="lib" path="/Users/AmalieHaugAmundsen/Documents/2. klasse/Vår/PU/Programmering/Selenium/selenium-java-3/lib/sac-1.3.jar"/>
+	<classpathentry kind="lib" path="/Users/AmalieHaugAmundsen/Documents/2. klasse/Vår/PU/Programmering/Selenium/selenium-java-3/lib/serializer-2.7.2.jar"/>
+	<classpathentry kind="lib" path="/Users/AmalieHaugAmundsen/Documents/2. klasse/Vår/PU/Programmering/Selenium/selenium-java-3/lib/websocket-api-9.2.15.v20160210.jar"/>
+	<classpathentry kind="lib" path="/Users/AmalieHaugAmundsen/Documents/2. klasse/Vår/PU/Programmering/Selenium/selenium-java-3/lib/websocket-client-9.2.15.v20160210.jar"/>
+	<classpathentry kind="lib" path="/Users/AmalieHaugAmundsen/Documents/2. klasse/Vår/PU/Programmering/Selenium/selenium-java-3/lib/websocket-common-9.2.15.v20160210.jar"/>
+	<classpathentry kind="lib" path="/Users/AmalieHaugAmundsen/Documents/2. klasse/Vår/PU/Programmering/Selenium/selenium-java-3/lib/xalan-2.7.2.jar"/>
+	<classpathentry kind="lib" path="/Users/AmalieHaugAmundsen/Documents/2. klasse/Vår/PU/Programmering/Selenium/selenium-java-3/lib/xercesImpl-2.11.0.jar"/>
+	<classpathentry kind="lib" path="/Users/AmalieHaugAmundsen/Documents/2. klasse/Vår/PU/Programmering/Selenium/selenium-java-3/lib/xml-apis-1.4.01.jar"/>
+	<classpathentry kind="lib" path="/Users/AmalieHaugAmundsen/Documents/2. klasse/Vår/Databaser/Øving 3/SqlClient.jar"/>
 	<classpathentry kind="output" path="alarMe-backend/bin"/>
 </classpath>

@@ -19,9 +19,9 @@ public class LoginProcess extends ConnectToDatabase {
 	
 	//method to set the chromedriver.
 	public void init() {
-		//System.setProperty("webdriver.chrome.driver", "chromedriver");
-		System.setProperty("webdriver.chrome.driver", "C:\\Users\\Heidi\\"
-							+ "worspace1\\AlarMe\\chromedriver_win32\\chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver", "chromedriver");
+		//System.setProperty("webdriver.chrome.driver", "C:\\Users\\Heidi\\"
+						//	+ "worspace1\\AlarMe\\chromedriver_win32\\chromedriver.exe");
 	
 	}
 	
@@ -43,7 +43,7 @@ public class LoginProcess extends ConnectToDatabase {
         	driver.findElement(By.name("institusjonsvalg:j_idt126")).click();
         }
         Thread.sleep(5000);
-        driver.findElement(By.linkText("Pålogging via Feide")).click();
+        driver.findElement(By.linkText("Pï¿½logging via Feide")).click();
         Thread.sleep(5000);
     }
     
