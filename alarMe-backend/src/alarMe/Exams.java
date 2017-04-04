@@ -1,6 +1,5 @@
 package alarMe;
 
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import java.sql.PreparedStatement;
@@ -34,6 +33,7 @@ public class Exams extends LoginProcess {
     
     public void setExams(){
     	//STUDWEB
+    	//loads the webpage
         driver.get("https://idp.feide.no/simplesaml/module.php/feide/login.php?asLen=169&AuthState=_"
                 + "d3cf8da4fdb8785ba65151ba2683aca1150fe3bfc2%3Ahttps%3A%2F%2Fidp.feide.no%2Fsimplesaml%"
                 + "2Fsaml2%2Fidp%2FSSOService.php%3Fspentityid%3Dhttps%253A%252F%252Ffsweb.no"
@@ -46,20 +46,20 @@ public class Exams extends LoginProcess {
 		}
 
         //Choose NTNU as the institution
-      /*  try {
+        try {
 			chooseNTNU();
 		} catch (InterruptedException e) {
 			
 			e.printStackTrace();
 		}
 
-        //innlogging med brukerinput
+        //Login with userinput - fetched from the database.
         try {
 			login();
 		} catch (InterruptedException e) {
 			
 			e.printStackTrace();
-		}*/
+		}
 
         //need to choose NTNU as the institution one more time
         try {
@@ -69,7 +69,9 @@ public class Exams extends LoginProcess {
 			e.printStackTrace();
 		}
 
-        //adds the exam dates to this.exams as <subject code subject name, date>
+        //adds the exam dates to examdate, the coursecodes to coursecode and the course name to coursename.
+        //all are lists.
+        //converts webelement into string.
         List<WebElement> datesAndSubjects = driver.findElements(By.className("infoLinje"));
         for (WebElement element : datesAndSubjects){
             int index = datesAndSubjects.indexOf(element);
@@ -77,7 +79,6 @@ public class Exams extends LoginProcess {
                 String date = element.getText();
                 String courseCode = datesAndSubjects.get(index + 1).getText();
                 String courseName = datesAndSubjects.get(index + 2).getText();
-                //this.exams.put(courseCode, date);
                 this.examdate.add(date);
                 this.coursecode.add(courseCode);
                 this.coursename.add(courseName);
@@ -89,6 +90,7 @@ public class Exams extends LoginProcess {
     
     
     //Code to add courses and exam dates to Database
+	//the method is a boolean only because we wanted to test the method, and needed a boolean.
     public boolean addExamsToDatabase() {
     	boolean success = true;	   
     	try{
@@ -111,4 +113,6 @@ public class Exams extends LoginProcess {
     	}
     		
     
+
+
 }

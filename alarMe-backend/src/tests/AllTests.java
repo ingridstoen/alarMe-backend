@@ -72,7 +72,7 @@ public class AllTests {
 		String d = Integer.toString(c.getStudentId());
 		assertEquals("ingridbs", a);
 		assertEquals("In0191*s", b);
-		assertEquals("119", d);
+		assertEquals("11", d);
 		
 	}
 	

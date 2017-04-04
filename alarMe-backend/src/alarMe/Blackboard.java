@@ -1,4 +1,5 @@
 package alarMe;
+
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,61 +23,46 @@ public class Blackboard extends LoginProcess {
 		super(username, user_password, driver);
 	}
 	
-	
+	//method that return the name of the assignments, f.ex "oving 4", as a list.
 	public ArrayList<String> getAssignmentsB(){
 		return assignmentsB;
 	}
 	
+	//metod that return all the coursecodes as a list.
 	public ArrayList<String> getCoursecodeB(){
 		return coursecodeB;
 	}
 	
+	//method that return the dates the assignments are expected to be handed in as a list.
 	public ArrayList<String> getDatesB(){
 		return datesB;
 	}
 	
 	
 	public void setAssignmentsB(){
-		//boolean success = true;
+		//loads the webpage
 		driver.get("https://ntnu.blackboard.com/webapps/portal/execute/tabs/tabAction?tab_tab_group_id=_70_1");
 	    driver.findElement(By.className("loginPrimary")).click();
 	    try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
 			e.printStackTrace(); 
-			//success = false;
 		}
 
-	    //Choose NTNU as the institution
-	   /* try {
-			chooseNTNU();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-			//success = false;
-		}
-
-	    //Fill in username and password to log in
-	    try {
-			login();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-			//success = false;
-		}*/
-
-	    //klikke inn på "varsler"
+	    //Clicks on "Varsler" at blackboard
 	    driver.findElement(By.linkText("Varsler")).click();
 	    try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
-			//success = false;
 		}
 	    driver.findElement(By.id("headerTextheader::1-dueView::1-dueView_4")).click();
 	    driver.findElement(By.id("headerTextheader::1-dueView::1-dueView_3")).click();
 	    driver.findElement(By.id("headerTextheader::1-dueView::1-dueView_2")).click();
 
 	    
-	    //hent alle ovinger
+	    //fetches all the assignments. 
+	    //Converts the webelements to strings and put them in the assignments list.
 	    List<WebElement> allAssignments = driver.findElements(By.className("itemGroups"));
 	    for (WebElement element : allAssignments) {
 	    	String assig = element.getText();
@@ -84,7 +70,7 @@ public class Blackboard extends LoginProcess {
 	    		assignments.add(assig);
 	    	}
 	    }
-		       
+		//Strips the assignment strings in the assignments list for unecessary info.       
 	    for(String element1 : assignments){
 	    	String assignment = element1.replace("\n", " ");
 			assignment = assignment.replaceAll("[,-]", "");
@@ -94,7 +80,7 @@ public class Blackboard extends LoginProcess {
 			String[] items = assignment.split(".17");
 			List<String> assignments3 = Arrays.asList(items);
 		   
-		  	                	
+		                  	
 	       for(String element2 : assignments3){
 	        	List<String> dates = Arrays.asList(element2.split("  "));
 	        	assignments1.addAll(dates);
@@ -123,14 +109,11 @@ public class Blackboard extends LoginProcess {
 	           			}
 	           		}
 	        	}
+	}	    	
 	        
-
-	}
-	//return success;
-	    	
-	        
-	}
-
+}
+	//The method checks if we have the assignments double up, because on blackboard the assignment
+	//is sometimes put on both future and this week. 
 	public void checkForEqualAssignments(){
 		ArrayList<String> assignments_one = assignmentsB;
 		ArrayList<String> coursecode_one = coursecodeB;
@@ -154,7 +137,8 @@ public class Blackboard extends LoginProcess {
 		
 	}
 	
-    //Code to add BlackBoard assignments to Database
+    //Code to add BlackBoard assignments to Database.
+	//the method is a boolean only because we wanted to test the method, and needed a boolean.
     public boolean addAssignmentsBToDatabase()  {
     	boolean success = true;   
     	try{

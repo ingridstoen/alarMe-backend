@@ -1,12 +1,5 @@
+
 package alarMe;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -24,6 +17,7 @@ public class ConnectToDatabase {
 	protected static String user_password;
 	protected static int student_id;
 
+	//method to connect to the database.
 	public void setConnection() throws ClassNotFoundException, SQLException{
 		try {
         	Class.forName("com.mysql.jdbc.Driver");
@@ -38,7 +32,7 @@ public class ConnectToDatabase {
             e.printStackTrace();}
   }
 
-	
+	//method that checks if it has been added a new user to the database.
 	public boolean checkForNewUser(){
 		try {
 			try {
@@ -66,40 +60,19 @@ public class ConnectToDatabase {
 		}catch(Exception e){
 			System.out.println("Her skjedde det noe feil: " + e);
 					
-		/*}finally {
-	        if (stm != null) { try { 
-				stm.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			} }
-	        if (connection != null) {
-	            try {
-	                connection.close();
-	            } catch (SQLException e) {
-	                e.printStackTrace();
-	            }
-	    }*/
+
 	}
 	return false;
 			
 }
 
-	
+	//method that returns the new user as a list [username, password].
 	public ArrayList<String> newUser(){
 		ArrayList<String> user = new ArrayList<String>();
 		if (checkForNewUser() == true){
-			/*try {
-				try {
-					setConnection();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			} catch (ClassNotFoundException e1) {
-				e1.printStackTrace();
-			}*/
 			Statement stm = null;
 			try{
-				int student_id = 4;
+				int student_id = 9;
 				stm = connection.createStatement();
 				ResultSet rs = stm.executeQuery("select * from Student");
 				while(rs.next()){
@@ -122,12 +95,14 @@ public class ConnectToDatabase {
 	return (user);
 	}
 	
+	//method that returns the new user's username.
 	public String getUserName(){
 		ArrayList<String> user = newUser();
 		username = user.get(0);
 		return username;
 	}
 	
+	//method that returns the new user's password.
 	public String getUserPassword(){
 		ArrayList<String> user = newUser();
 		user_password = user.get(1);
@@ -135,6 +110,7 @@ public class ConnectToDatabase {
 				
 	}
 	
+	//method that returns the new user's student_id. The student_id is set by the database.
 	public int getStudentId(){
 		return student_id;
 	}
